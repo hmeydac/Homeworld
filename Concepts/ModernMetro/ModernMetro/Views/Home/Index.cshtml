@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <header>
+        <h1>Southworks<span>passion for technology</span></h1>
+    </header>
+    <div class="main clearfix">
+        <nav id="menu" class="nav">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i aria-hidden="true" class="icon-home"></i>
+                        </span>
+                        <span>About Us</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i aria-hidden="true" class="icon-services"></i>
+                        </span>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i aria-hidden="true" class="icon-portfolio"></i>
+                        </span>
+                        <span>Technologies</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i aria-hidden="true" class="icon-blog"></i>
+                        </span>
+                        <span>Blogs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i aria-hidden="true" class="icon-team"></i>
+                        </span>
+                        <span>Work for Us</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <i aria-hidden="true" class="icon-contact"></i>
+                        </span>
+                        <span>Contact Us</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- /container -->
+
+@section scripts
+{
+    <script>
+        //  The function to change the class
+        var changeClass = function (r, className1, className2) {
+            var regex = new RegExp("(?:^|\\s+)" + className1 + "(?:\\s+|$)");
+            if (regex.test(r.className)) {
+                r.className = r.className.replace(regex, ' ' + className2 + ' ');
+            } else {
+                r.className = r.className.replace(new RegExp("(?:^|\\s+)" + className2 + "(?:\\s+|$)"), ' ' + className1 + ' ');
+            }
+            return r.className;
+        };
+
+        //  Creating our button in JS for smaller screens
+        var menuElements = document.getElementById('menu');
+        menuElements.insertAdjacentHTML('afterBegin', '<button type="button" id="menutoggle" class="navtoogle" aria-hidden="true"><i aria-hidden="true" class="icon-menu"> </i> Menu</button>');
+
+        //  Toggle the class on click to show / hide the menu
+        document.getElementById('menutoggle').onclick = function () {
+            changeClass(this, 'navtoogle active', 'navtoogle');
+        };
+
+        $(document).ready(function () {
+            $(".nav li").click(function () {
+                $(".nav li").addClass("fade-out");
+                $("header").addClass("fade-out");
+                $(this).addClass("emphasis");
+                setTimeout(function () {
+                    $(".container").html("");
+                    $.ajax({
+                        url: "/Home/AboutUs",
+                        cache: false,
+                        type: "GET"
+                    }).done(jQuery.proxy(function (template) {
+                        $(".container").removeClass("fade-out"); $(".container").html(template); }, this));
+                }, 1000);
+            });
+        });
+    </script>
+}
