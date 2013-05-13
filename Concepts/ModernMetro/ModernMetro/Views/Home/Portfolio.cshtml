@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "~/Views/Shared/_PortfolioLayout.cshtml";
+}
+
+<style type="text/css">
+    ul#demo-block
+    {
+        margin: 0 15px 15px 15px;
+    }
+
+        ul#demo-block li
+        {
+            margin: 0 0 10px 0;
+            padding: 10px;
+            display: inline;
+            float: left;
+            clear: both;
+            color: #aaa;
+            background: url('/Content/images/bg-black.png');
+            font: 11px Helvetica, Arial, sans-serif;
+        }
+
+            ul#demo-block li a
+            {
+                color: #eee;
+                font-weight: bold;
+            }
+</style>
+
+<!--Thumbnail Navigation-->
+<div id="prevthumb"></div>
+<div id="nextthumb"></div>
+
+<!--Arrow Navigation-->
+<a id="prevslide" class="load-item"></a>
+<a id="nextslide" class="load-item"></a>
+<div id="thumb-tray" class="load-item">
+    <div id="thumb-back"></div>
+    <div id="thumb-forward"></div>
+</div>
+
+<!--Time Bar-->
+<div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+</div>
+
+<!--Control Bar-->
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $.supersized({
+
+                // Functionality
+                slide_interval: 3000,		// Length between transitions
+                transition: 1, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
+                transition_speed: 700,		// Speed of transition
+
+                // Components							
+                slide_links: 'blank',	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
+                slides: [			// Slideshow Images
+                    { image: '/Content/Images/trainingkit.jpg' },
+                    { image: '/Content/Images/demo.jpg' },
+                    { image: '/Content/Images/keynote.jpg' }
+                ]
+
+            });
+        });
+		</script>
+}

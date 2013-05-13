@@ -13,5 +13,10 @@
         {
             return this.PartialView();
         }
+
+        public ActionResult Portfolio()
+        {
+            return this.View();
+        }
     }
 }

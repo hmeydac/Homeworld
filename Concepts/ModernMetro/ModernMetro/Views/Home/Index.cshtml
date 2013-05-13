@@ -92,13 +92,8 @@
                 $("header").addClass("fade-out");
                 $(this).addClass("emphasis");
                 setTimeout(function () {
-                    $(".container").html("");
-                    $.ajax({
-                        url: "/Home/AboutUs",
-                        cache: false,
-                        type: "GET"
-                    }).done(jQuery.proxy(function (template) {
-                        $(".container").removeClass("fade-out"); $(".container").html(template); }, this));
+                    $(".container").removeClass("fade-out");
+                    window.location = "/Home/Portfolio";
                 }, 1000);
             });
         });
