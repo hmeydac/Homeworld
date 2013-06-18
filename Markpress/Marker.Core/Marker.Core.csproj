@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EC8A9F78-6C10-41F8-9A8F-2ADB9B904278}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MarkdownContent.Core</RootNamespace>
+    <AssemblyName>MarkdownContent.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\MarkdownPreview\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.3\lib\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\Libs\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\TextTemplating\Microsoft.VisualStudio.TextTemplating.10.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll</HintPath>
+    </Reference>
+    <Reference Include="MoonShine">
+      <HintPath>..\Libs\MoonShine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeSnippetProcessor.cs" />
+    <Compile Include="Engines\IMarkdownEngine.cs" />
+    <Compile Include="Engines\MarkdownEngineFactory.cs" />
+    <Compile Include="Engines\MarkdownSharpEngine.cs" />
+    <Compile Include="Engines\SundownEngine.cs" />
+    <Compile Include="Helpers\CodeSnippetHighlighter.cs" />
+    <Compile Include="Helpers\DirectoryHelper.cs" />
+    <Compile Include="Helpers\DocumentMetadataHelper.cs" />
+    <Compile Include="Helpers\HtmlParser.cs" />
+    <Compile Include="Helpers\ProgressNotificationHelper.cs" />
+    <Compile Include="Helpers\SnippetsHelper.cs" />
+    <Compile Include="Helpers\StepNotificationHelper.cs" />
+    <Compile Include="Helpers\VSIGenerator.cs" />
+    <Compile Include="Helpers\ZipHelper.cs" />
+    <Compile Include="MarkdownToHtmlConverter.cs" />
+    <Compile Include="Model\CodeSnippet.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextTemplatingHelper.cs" />
+    <Compile Include="TextTemplating\PropertiesDirectiveProcessor.cs" />
+    <Compile Include="TextTemplating\PropertyData.cs" />
+    <Compile Include="TextTemplating\SimpleTemplateProcessor.cs" />
+    <Compile Include="TextTemplating\TemplateHost.cs" />
+    <Compile Include="TextTemplating\TemplatePropertyAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{C0F70C9C-5DF5-4E10-A5E0-757A1C26B46E}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wilco.SyntaxHighlighting\Wilco.SyntaxHighlighting.csproj">
+      <Project>{18A6C758-559C-404C-B434-858051D3C73F}</Project>
+      <Name>Wilco.SyntaxHighlighting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

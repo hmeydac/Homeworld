@@ -1,0 +1,85 @@
+﻿<RibbonWindow x:Name="ribbonWindow" x:Class="Markpress.MainWindow"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:viewModel="clr-namespace:Markpress.ViewModel"
+              Title="MainWindow"
+              Width="800"
+              Height="500"
+              Loaded="WindowLoaded"
+              WindowStartupLocation="CenterScreen"
+              WindowState="Maximized"
+              d:DataContext="{d:DesignInstance viewModel:MarkpressViewModel}"
+              mc:Ignorable="d"
+              >
+    <RibbonWindow.InputBindings>
+        <KeyBinding Key="O"
+                    Command="{Binding RibbonContext.OpenCommand}"
+                    Modifiers="Control" />
+        <KeyBinding Key="S"
+                    Command="{Binding RibbonContext.SaveCommand}"
+                    Modifiers="Control" />
+    </RibbonWindow.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Ribbon x:Name="RibbonMenu"
+                Grid.Row="0"
+                DataContext="{Binding RibbonContext}">
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu KeyTip="F" SmallImageSource="Images/File_32x32.png">
+                    <RibbonApplicationMenuItem x:Name="NewMenuItem"
+                                               Header="_New"
+                                               Command="{Binding NewCommand}"
+                                               ImageSource="Images/New_48x48.png"
+                                               KeyTip="N"
+                                               ToolTipDescription="Starts a new Markdown document."
+                                               ToolTipTitle="New Document (CTRL+N)" 
+                                               CommandParameter="{Binding DataContext.DocumentContext, ElementName=ribbonWindow}" />
+                    <RibbonApplicationMenuItem x:Name="OpenMenuItem"
+                                               Header="_Open"
+                                               ImageSource="Images/Open_48x48.png"
+                                               KeyTip="O"
+                                               ToolTipDescription="Open a Markdown document."
+                                               ToolTipTitle="Open Document (CTRL+O)" />
+                    <RibbonApplicationMenuItem x:Name="SaveMenuItem"
+                                                    Header="_Save"
+                                                    ImageSource="Images/Save_48x48.png"
+                                                   Command="{Binding SaveCommand}"
+                                                    CommandParameter="{Binding DataContext.DocumentContext, ElementName=ribbonWindow}"
+                                                    KeyTip="S"
+                                                    ToolTipDescription="Save document."
+                                                    ToolTipTitle="Save Document (CTRL+S)">
+                    </RibbonApplicationMenuItem>
+                    <RibbonApplicationMenuItem x:Name="CloseMenuItem"
+                                               Command="{Binding CloseCommand}"
+                                               Header="_Close"
+                                               ImageSource="Images/Close_48x48.png"
+                                               KeyTip="C"
+                                               ToolTipDescription="Close Markpress."
+                                               ToolTipTitle="Close Application (ALT+F4)" />
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+        </Ribbon>
+        <Grid x:Name="ContentGrid" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="50" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" MinWidth="50" />
+            </Grid.ColumnDefinitions>
+
+
+            <Grid x:Name="CodeEditorGrid" Grid.Column="0" />
+            <GridSplitter Grid.Column="1"
+                          Width="15"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Stretch" />
+            <Grid x:Name="PreviewerGrid" Grid.Column="2">
+                <WebBrowser x:Name="Previewer" Width="Auto" />
+            </Grid>
+        </Grid>
+    </Grid>
+</RibbonWindow>
